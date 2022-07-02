@@ -24,7 +24,7 @@ if(config.MODE === 'CLUSTER'){
         }
     }
     else{
-        app.listen("4000", ()=>{
+        app.listen(config.PORT, ()=>{
             console.log(`server on : http://localhost:${config.PORT} || worker -> ${process.pid}`  )
     })
     }
