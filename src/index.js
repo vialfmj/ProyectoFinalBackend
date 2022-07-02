@@ -11,8 +11,8 @@ const cluster = require("cluster")
 if(config.MODE === 'FORK'){
     logger.info("inciando en modo fork")
     //console.log("iniciando en modo fork")
-    app.listen("4000", ()=>{
-        console.log(`server on : http://localhost:${config.PORT} || master PID -> ${process.pid}`  )
+    app.listen(config.port, ()=>{
+        logger.info(`server on : http://localhost:${config.PORT} || master PID -> ${process.pid}`  )
 })
 }
 if(config.MODE === 'CLUSTER'){
@@ -25,7 +25,7 @@ if(config.MODE === 'CLUSTER'){
     }
     else{
         app.listen(config.PORT, ()=>{
-            console.log(`server on : http://localhost:${config.PORT} || worker -> ${process.pid}`  )
+            logger.info(`server on : http://localhost:${config.PORT} || worker -> ${process.pid}`  )
     })
     }
 }
