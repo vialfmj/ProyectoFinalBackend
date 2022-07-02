@@ -11,7 +11,7 @@ const cluster = require("cluster")
 if(config.MODE === 'FORK'){
     logger.info("inciando en modo fork")
     //console.log("iniciando en modo fork")
-    app.listen(config.port, ()=>{
+    app.listen(config.PORT, ()=>{
         logger.info(`server on : http://localhost:${config.PORT} || master PID -> ${process.pid}`  )
 })
 }
