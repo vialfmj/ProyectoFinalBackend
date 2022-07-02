@@ -1,6 +1,6 @@
 const passport = require("passport")
 const LocalStrategy = require("passport-local").Strategy
-const expressSession = require("express-session")
+const session = require("express-session")
 const {mongoose} = require("../DB/mongo_atlas")
 const {DB_USER, DB_PASS} = require("../config").mongo_atlas
 
