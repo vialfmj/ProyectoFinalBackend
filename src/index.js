@@ -38,12 +38,6 @@ app.use(express.static("src/public"))
 app.use(express.json())
 app.use(express.urlencoded({extended : true}))
 app.use(cors())
-app.use(session({
-    secret: 'secreto1234',
-    resave: true,
-    saveUninitialized: true
-
-}))
 
 //passport 
 const passportConfig = require("./utils/passport")
