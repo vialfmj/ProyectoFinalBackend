@@ -1,0 +1,9 @@
+.profilePic {
+    width: 200px;
+    height: 200px;
+}
+
+.profilePic img {
+    width: 100%;
+    height: 100%;
+}

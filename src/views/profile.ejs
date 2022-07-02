@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/pulse/bootstrap.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <title>Home</title>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="/profile">Mi cuenta</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
+                aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+                <div class="navbar-nav">
+                    <a class="nav-link" href="/api/cart/micarrito/<%= cartId %>">Cart</a>
+                    <a class="nav-link" href="/profile/misdatos">Mis Datos</a>
+                    <a class="nav-link" href="/logout">Logout</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+    <div class="container d-flex justify-content-center">
+        <h1>Productos</h1>
+    </div>
+    <div class="container d-flex flex-wrap bg-light">
+        <% data.forEach(function(product){ %>
+
+              
+            <div class="container col-md-6 mt-3 mb-3">
+                <div class="container profilePic">
+                    <img src="<%= product.imagen %> " alt="">
+                </div>
+                <div class="container row">
+                    <div class="container col-md-6"><h3>Nombre</h3></div>
+                    <div class="container col-md-6"><h3><%= product.nombre %></h3></div>
+                </div>
+                <div class="container row">
+                    <div class="container col-md-6"><h3>Descripcion</h3></div>
+                    <div class="container col-md-6"><p><%= product.descripcion %></p></div>
+                </div>
+                <div class="container row">
+                    <div class="container col-md-6"><h3>Precio</h3></div>
+                    <div class="container col-md-6"><p><%= product.precio %></p></div>
+                </div>
+                <div class="container row">
+                    <div class="container col-md-6"><h3>Stock</h3></div>
+                    <div class="container col-md-6"><p><%= product.stock %></p></div>
+                </div>
+                <div class="container d-flex justify-content-center">
+                    <a href="/api/cart/addToCart/?idProd=<%= product.id %>&idCart=<%= cartId %>">
+                        <button class="btn btn-primary">Agregar al carrito</button>
+                    </a>
+                </div>
+            </div>
+        <% }); %>
+
+
+        </div>
+</body>
+</html>
