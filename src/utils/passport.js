@@ -2,6 +2,10 @@ const passport = require("passport")
 const LocalStrategy = require("passport-local").Strategy
 const expressSession = require("express-session")
 const {mongoose} = require("../DB/mongo_atlas")
+const {DB_USER, DB_PASS} = require("../config").mongo_atlas
+
+
+
 
 const { encrypt, verify } = require("./encrypt")
 const UserModel = require("../models/user")
@@ -70,17 +74,22 @@ passport.deserializeUser(async (username, done) => {
     let user = await UserModel.findOne({ email: username })
     done(null, user);
 })
-
-app.use(expressSession({
-    secret: "secret123",
+//session setupS 
+const MongoStore = require("connect-mongo")
+const advancedOptions = {useNewUrlParser:true, useUnifiedTopology:true }
+app.use(session({
+    secret: 'palbrasecreta',
+    resave: true,
+    saveUninitialized:true,
+    store: MongoStore.create({
+        mongoUrl: `mongodb+srv://${DB_USER}:${DB_PASS}@cluster0.6fibj.mongodb.net/?retryWrites=true&w=majority`,
+        mongoOptions: advancedOptions
+    }),
     cookie: {
-        httpOnly: false,
-        secure: false,
-        maxAge: 60000
-    },
-    resave: false,
-    saveUninitialized: false
+        maxAge: 600000
+    }
 }))
+
 
 
 app.use(passport.initialize());
