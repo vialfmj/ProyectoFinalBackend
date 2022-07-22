@@ -4,7 +4,7 @@ const cartController = require("./controller/cartController")
 
 module.exports = app => {
     let Router = express.Router()
-    app.use("/api/cart", Router)
+    app.use("/carrito", Router)
     Router.get("/micarrito/:idCart", isAuth, cartController.getCartPage)
     Router.post("/", isAuth, cartController.addNewCart)
     Router.get("/addToCart", isAuth, cartController.addToCart)

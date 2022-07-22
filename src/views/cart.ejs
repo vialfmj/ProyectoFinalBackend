@@ -21,6 +21,7 @@
                             <th scope="col">Nombre</th>
                             <th scope="col">Descripcion</th>
                             <th scope="col">Precio</th>
+                            <th scope="col">Cantidad</th>
                             <th scope="col"> </th>
                           </tr>
                         </thead>
@@ -30,8 +31,9 @@
                         <th scope="row"><%= product.nombre %></th>
                         <td><%= product.descripcion %></td>
                         <td><%= product.precio %> </td>
+                        <td><%= product.cantidad %></td>
                         <td>
-                            <a href="/api/cart/removeFromCart/?idCart=<%= idCart %>&idProd=<%= product.id %>">
+                            <a href="/carrito/removeFromCart/?idCart=<%= idCart %>&idProd=<%= product.id %>">
                                 <button class="btn btn-primary">X</button>
                             </a>
                         </td>
@@ -40,23 +42,16 @@
                     </tbody>
                 </table>
                 <div class="container">
-                    <a href="/api/cart/buy/?idCart=<%= idCart %>">
+                    <a href="/carrito/buy/?idCart=<%= idCart %>">
                         <button class="btn btn-primary">Iniciar Compra</button>
                     </a>
                 </div>
                   <% } else{ %>  
                     <h2>El carrito esta vacio</h2>
-                    <a href="/profile">
+                    <a href="/profile/me">
                         <button class="btn btn-primary">Volver</button>
                     </a>
                  <% } %>
-
     </div>
-
-
-
-
-
-    <a href="/profile">Volver al perfil</a>
 </body>
 </html>

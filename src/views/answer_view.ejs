@@ -1,0 +1,38 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/pulse/bootstrap.min.css">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Responder mensaje</h1>
+    <div id="messageToAnswer" class="container">
+        <p><%= message.email  %> </p>
+        <p><%= message.body  %> </p>
+        <p><%= message.fyh  %> </p>
+    </div>
+    <div id="answersContainer" class="container">
+
+    </div>
+    <form id="answerForm">
+        <div class="container bg-light">
+
+            <div class="form-group container">
+                <label class="col-form-label mt-4" for="answerEmail">Email:</label>
+            <input type="text" class="form-control" placeholder="Respuesta" id="answerEmail">
+          </div>
+          <div class="form-group container">
+            <label for="answerText" class="form-label mt-4">Respuesta</label>
+            <textarea class="form-control" id="answerText" rows="3"></textarea>
+          </div>
+          <div class="mt-4 container d-flex justify-content-center">
+              <button type="submit" class="btn btn-primary">Enviar</button>
+          </div>
+        </div>
+    </form>
+    <script src="/socket.io/socket.io.min.js"></script>
+    <script src="/js/answer.js"></script>
+</body>
+</html>

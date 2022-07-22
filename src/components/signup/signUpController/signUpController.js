@@ -1,14 +1,26 @@
+const logger = require("../../../utils/loggers/winston")
+const SignUpService = require("../signUpService/signUpService")
+const CartService = require("../../cart/service/cartService")
+
 class SignUpController {
     getForm = async(req,res,next) => {
         res.render("signup")
     }
     signUp = async (req, res, next) => {
         try {
-            let data = req.body
-            console.log(data)
-            res.redirect("http://localhost:8080")
+            let imageToSave = ''
+            let cartId = await CartService.addNewCart()
+            if(req.file)
+            imageToSave =`/assets/${req.file.filename}`
+            req.body = {
+                ...req.body,
+                avatar: imageToSave,
+                cartId: cartId
+        }
+           let response = await SignUpService.signUp(req.body)
+           res.json(response)
         } catch (error) {
-            console.log(error)
+            res.json(error)
         }
     }
 }

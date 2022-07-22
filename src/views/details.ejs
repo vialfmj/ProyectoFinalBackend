@@ -1,0 +1,35 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/pulse/bootstrap.min.css">
+    <title>Document</title>
+</head>
+<body>
+    <div class="container d-flex justify-content-center">
+        <h1>Details </h1>
+    </div>
+    <div class="container">
+        <img class="w-25 h-25" src="<%= respuesta.imagenUrl %> " alt="">
+        <div>
+            <h2>
+                <%= respuesta.nombre %>
+            </h2>
+        </div>
+        <div>
+            <h2>
+                <%= respuesta.precio %>
+            </h2>
+        </div>
+        <div class="form-group">
+            <label class="form-label" for="quantity">Cantidad</label>
+            <input class="form-control" type="number" name="quantity" id="quantity">
+        </div>
+        <div>
+            <button class="btn btn-primary mt-4" id="addToCartButton">Agregar al carrito</button>
+        </div>
+    </div>
+    <script src="/js/details.js"></script>
+</body>
+</html>

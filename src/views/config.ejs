@@ -1,0 +1,47 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/pulse/bootstrap.min.css">
+    <title>Document</title>
+</head>
+<body>
+    <div class="container d-flex justify-content-center">
+        <h1>Configuraciones de sistema</h1>
+    </div>
+<div class="container mt-4">
+
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th scope="col">Variable</th>
+                <th scope="col">Valor</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr class="table-active">
+              <td>NODE_ENV</td>
+              <td><%= config.ENV %> </td>
+            </tr>
+            <tr class="table-active">
+                <td>PORT</td>
+                <td><%= config.PORT %> </td>
+              </tr>
+              <tr class="table-active">
+                <td>MODE</td>
+                <td><%= config.MODE %> </td>
+              </tr>
+              <tr class="table-active">
+                <td>SESSION_EXP(ms)</td>
+                <td><%= config.SESSION_EXP %> </td>
+              </tr>
+              <tr class="table-active">
+                <td>ADMIN_EMAIL</td>
+                <td><%= config.ADMIN_EMAIL %> </td>
+              </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>

@@ -22,9 +22,11 @@ class CartController {
     }
     addToCart = async (req, res, next) => {
         try {
-            let {idCart, idProd} = req.query
-            let response = await CartService.addToCart(idProd, idCart)
-            res.redirect("/profile")
+            let {idCart, idProd,cant} = req.query
+            let quantity
+            cant? quantity = cant : quantity = 1
+            let response = await CartService.addToCart(idProd, idCart, quantity)
+            res.redirect("/profile/me")
         } catch (error) {
             logger.error("Error al añadir producto")
         }
@@ -33,7 +35,7 @@ class CartController {
         try {
             let {idCart, idProd} = req.query
             let response = await CartService.removeFromCart(idProd, idCart)
-            res.redirect(`/api/cart/micarrito/${idCart}`)
+            res.redirect(`/carrito/micarrito/${idCart}`)
         } catch (error) {
             logger.error("error al remover del carrito")
         }

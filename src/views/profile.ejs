@@ -4,23 +4,24 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="css/pulse/bootstrap.min.css">
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="/css/pulse/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/style.css">
     <title>Home</title>
 </head>
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
         <div class="container-fluid">
-            <a class="navbar-brand" href="/profile">Mi cuenta</a>
+            <a class="navbar-brand" href="/profile/me">Mi cuenta</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
                 aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                 <div class="navbar-nav">
-                    <a class="nav-link" href="/api/cart/micarrito/<%= cartId %>">Cart</a>
+                    <a class="nav-link" href="/carrito/micarrito/<%= cartId %>">Cart</a>
                     <a class="nav-link" href="/profile/misdatos">Mis Datos</a>
                     <a class="nav-link" href="/logout">Logout</a>
+                    <a class="nav-link" href="/chat">Chat</a>
                 </div>
             </div>
         </div>
@@ -53,7 +54,12 @@
                     <div class="container col-md-6"><p><%= product.stock %></p></div>
                 </div>
                 <div class="container d-flex justify-content-center">
-                    <a href="/api/cart/addToCart/?idProd=<%= product.id %>&idCart=<%= cartId %>">
+                    <a href="/api/productos/<%= product.id %>">
+                        <button class="btn btn-primary">Detalles</button>
+                    </a>
+                </div>
+                <div class="container d-flex justify-content-center">
+                    <a href="/carrito/addToCart/?idProd=<%= product.id %>&idCart=<%= cartId %>">
                         <button class="btn btn-primary">Agregar al carrito</button>
                     </a>
                 </div>
@@ -62,5 +68,6 @@
 
 
         </div>
+        <script src="/js/profile.js"></script>
 </body>
 </html>

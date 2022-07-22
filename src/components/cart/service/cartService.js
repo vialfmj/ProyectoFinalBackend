@@ -1,11 +1,10 @@
 const mongoose = require("mongoose")
-const {accountSid, authToken} =require("../../../config").twilio
-const client = require('twilio')(accountSid, authToken);
 const CartModel = require("../../../models/cart")
-const ProductModel = require("../../../models/product")
 const logger = require("../../../utils/loggers/winston")
 const productsService = require("../../Products/services/productsService")
 const transporter = require("../../../utils/nodemailer/transporter")
+const {ADMIN_EMAIL} = require("../../../config").config
+const OrderModel = require("../../../models/order")
 
 class CartService {
     generateId = () => Math.random().toString(36)
@@ -17,26 +16,6 @@ class CartService {
         } catch (error) {
             console.log(error)
         }
-    }
-    enviarSms = (phone) => {
-            client.messages
-            .create({
-                body: `Su pedido ha sido confirmado`,
-                from: '+19896012784',
-                to: `${phone}`
-            })
-            .then(message => console.log(message.sid))
-            .done()
-    }
-    enviarWsp = (email, newProductos) => {
-        client.messages
-            .create({
-                body: `Nuevo pedido de: ${email}: ${JSON.stringify(newProductos)}`,
-                from: 'whatsapp:+14155238886',
-                to: 'whatsapp:+5492612511585'
-            })
-            .then(message => console.log(message.sid))
-            .done();
     }
     addNewCart = async () => {
         try {
@@ -56,12 +35,13 @@ class CartService {
             logger.error(error)
         }
     }
-    addToCart = async (idProd, idCart) => {
+    addToCart = async (idProd, idCart, quantity) => {
         let product = await productsService.getById(idProd)
         let productToAdd = {
             nombre: product.nombre,
             descripcion: product.descripcion,
             precio: product.precio,
+            cantidad: quantity,
             id: this.generateId()
         }
         let cart = await CartModel.findOne({ _id: idCart }).lean()
@@ -86,43 +66,63 @@ class CartService {
     }
     buy = async (idCart, email, phone) => {
         let productos = await this.getCart(idCart)
+        let orders = await OrderModel.find()
+        let orderNumber = orders.length
         let newProductos = []
+        const date = new Date()
+        const fecha = date.toLocaleDateString()
+        const hora = date.toLocaleTimeString()
+        const fyh = `El dia: ${fecha} a las ${hora}`
+
         productos.forEach(producto => {
             newProductos = [
                 ...newProductos,
                 {
                     producto: producto.nombre,
-                    precio: producto.precio
+                    precio: producto.precio,
+                    cantidad: producto.cantidad
                 }
             ]
         })
+        try {
+            let newOrder = await OrderModel({
+                "Ítems": newProductos,
+                "Número de orden": orderNumber,
+                "Fecha y hora": fyh,
+                "estado": 'generada',
+                "Email de quien realizo la orden": email
 
+            })
+            await newOrder.save()
+        } catch (error) {
+            logger.error(`error saving newOrder${error}`)
+        }
         const mailOptions = {
             from: 'ServidorNodeJs',
-            to: `testmailfranco@gmail.com`,
-            subject: `Nuevo pedido de: ${email}`,
+            to: ADMIN_EMAIL,
+            subject: `Nuevo pedido numero ${orderNumber}de: ${email}`,
             html: JSON.stringify(newProductos)
         }
-
-        this.enviarSms(phone)
-        this.enviarWsp(email, newProductos)
-        await this.enviarEmail(mailOptions)
+        const userMailOptions = {
+            from: 'ServidorNodeJs',
+            to: email,
+            subject: `Tu pedido numero ${orderNumber} fue procesado con exito!`,
+            html: JSON.stringify(newProductos)
+        }
+        try {
+            (async () => {
+                const info = await transporter.sendMail(mailOptions)
+                logger.info(info)
+            })();
+            (async () => {
+                const info = await transporter.sendMail(userMailOptions)
+                logger.info(info)
+            })();
+        } catch (error) {
+            logger.error(`Error in cartService.buy: ${error}`)    
+        }
+        
     }
-    /* 
-const mailOptions = {
-    from: 'ServidorNodeJs',
-    to: 'testmailfranco@gmail.com',
-    subject: 'Mail de prueba',
-    html: "Hola este es un mail de prueba"
-}
-try {
-    (async () => {
-        const info = await transporter.sendMail(mailOptions)
-        console.log(info)
-    })();
-} catch (error) {
-    console.log(error)    
-} */
 }
 
 module.exports = new CartService

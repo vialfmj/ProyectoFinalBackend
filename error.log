@@ -7,3 +7,26 @@
 {"kind":"ObjectId","message":"Cast to ObjectId failed for value \"62bf0faa898114f2d3ebea38/\" (type string) at path \"_id\" for model \"cart\"","name":"CastError","path":"_id","reason":{},"stringValue":"\"62bf0faa898114f2d3ebea38/\"","value":"62bf0faa898114f2d3ebea38/","valueType":"string"}
 {"kind":"ObjectId","message":"Cast to ObjectId failed for value \"62bf0faa898114f2d3ebea38/\" (type string) at path \"_id\" for model \"cart\"","name":"CastError","path":"_id","reason":{},"stringValue":"\"62bf0faa898114f2d3ebea38/\"","value":"62bf0faa898114f2d3ebea38/","valueType":"string"}
 {"kind":"ObjectId","message":"Cast to ObjectId failed for value \"62bf0faa898114f2d3ebea38/\" (type string) at path \"_id\" for model \"cart\"","name":"CastError","path":"_id","reason":{},"stringValue":"\"62bf0faa898114f2d3ebea38/\"","value":"62bf0faa898114f2d3ebea38/","valueType":"string"}
+{"level":"error"}
+{"level":"error","message":"error en signUp: TypeError: SignUpService.signUp is not a function"}
+{"level":"error","message":"SignUpService.signUp error: TypeError: Cannot convert object to primitive value"}
+{"level":"error","message":"bad data"}
+{"level":"error","message":"bad data"}
+{"level":"error","message":"SignUpService.signUp error: TypeError: Cannot read properties of null (reading 'password')"}
+{"level":"error","message":"SignUpService.signUp error: TypeError: Cannot set properties of null (setting 'password')"}
+{"level":"error","message":"SignUpService.signUp error: ValidationError: cartId: Path `cartId` is required., avatar: Path `avatar` is required."}
+{"level":"error","message":"error en signUp: TypeError: Cannot read properties of undefined (reading 'json')"}
+{"level":"error","message":"error en signUp: ReferenceError: CartController is not defined"}
+{"level":"error","message":"error en signUp: TypeError: Cannot read properties of undefined (reading 'filename')"}
+{"level":"error","message":"error en signUp: TypeError: Cannot read properties of undefined (reading 'filename')"}
+{"level":"error","message":"error en signUp: TypeError: Cannot read properties of undefined (reading 'filename')"}
+{"level":"error"}
+{"level":"error"}
+{"level":"error"}
+{"level":"error","message":"Error: ReferenceError: newUser is not defined"}
+{"level":"error","message":"Error: ReferenceError: newUser is not defined"}
+{"level":"error","message":"jwt must be a string","name":"JsonWebTokenError"}
+{"level":"error","message":"jwt must be a string","name":"JsonWebTokenError"}
+{"kind":"ObjectId","message":"Cast to ObjectId failed for value \"{}\" (type Object) at path \"_id\" for model \"messages\"","name":"CastError","path":"_id","reason":{},"stringValue":"\"{}\"","value":{},"valueType":"Object"}
+{"level":"error","message":"SignUpService.signUp error: ValidationError: age: Cast to Number failed for value \"w\" (type string) at path \"age\""}
+{"level":"error","message":"error en getByCategory(): Assignment to constant variable.","stack":"TypeError: Assignment to constant variable.\n    at productsService.getByCategory (E:\\cursoBackend\\tercera-entrega\\src\\components\\Products\\services\\productsService.js:43:21)\n    at processTicksAndRejections (node:internal/process/task_queues:96:5)\n    at async getById (E:\\cursoBackend\\tercera-entrega\\src\\components\\Products\\controller\\productsController.js:15:21)"}

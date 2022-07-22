@@ -1,6 +1,7 @@
 const mongoose = require("mongoose")
 
 const ProductoModel = require("../../../models/product")
+const logger = require("../../../utils/loggers/winston")
 
 
 
@@ -24,7 +25,7 @@ class productsService {
             })
             return newArray
         } catch (error) {
-            console.log(error, "error in MongoDbContainer: getAll()")
+            logger.error( "error in getAll():", error)
         }
     }
     getById = async (id) => {
@@ -32,7 +33,17 @@ class productsService {
             const res = await ProductoModel.findById(id)
             return res
         } catch (error) {
-            console.log(error, "error in MongoDbContainer: getById()")
+            console.log( "error in  getById():",error)
+        }
+    }
+    getByCategory = async(category) => {
+        try {
+            const res = await ProductoModel.find({categoria:category})
+            if(!(res.length > 0))
+                res = undefined
+            return res
+        } catch (error) {
+            logger.error("error en getByCategory():", error)
         }
     }
     add = async (product) => {
@@ -42,7 +53,7 @@ class productsService {
             return `producto agregado con el id:${newProductSaved._id}`
 
         } catch (error) {
-            console.log(error)
+            logger.error("error in add():",error)
         }
     }
     update = async (id, updatedProduct) => {
@@ -50,7 +61,7 @@ class productsService {
             await ProductoModel.findByIdAndUpdate(id, updatedProduct)
             return `se modifico el producto con id: ${id}`
         }catch(error){
-            console.log(error)
+            logger.error("error in update():" , error)
         }
 
     }
@@ -59,7 +70,7 @@ class productsService {
             await ProductoModel.findByIdAndDelete(id)
             return `se elimino el producto: ${id}`
         } catch (error) {
-            console.log(error)
+            logger.error("error in delete():" , error)
         }
     }
 }

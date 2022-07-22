@@ -20,6 +20,10 @@ const productSchema = {
         type: Number,
         required: true
     },
+    categoria: {
+        type: String,
+        required: true
+    },
     stock: {
         type: Number,
         required: true
